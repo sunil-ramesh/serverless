@@ -1,16 +1,4 @@
-# version: 0.2
 
-# phases:
-#   build:
-#     commands:
-#       - dotnet restore
-#       - dotnet publish -c Release
-#       - cd bin/Release/netcoreapp2.1/publish
-#       - dotnet lambda package-ci --s3-bucket utility-s3 --output-template updated-ci-cd-serverless.template           
-# artifacts:
-#   files:
-#     - bin/Release/netcoreapp2.1/publish/updated-ci-cd-serverless.template
-#   discard-paths: yes
 version: 0.1
  
 phases:
@@ -32,7 +20,3 @@ phases:
       - zip -j dist/deploy.zip bin/Release/netcoreapp2.1/publish/*
       - aws cloudformation package --template-file lam.yaml --s3-bucket sam-ci-cd --output-template-file app-output_sam.yaml
       - aws cloudformation deploy --template-file app-output_sam.yaml --stack-name new-sam-ci --capabilities CAPABILITY_IAM
-# artifacts:
-#   files:
-#     - bin/Release/netcoreapp1.0/*
-#   discard-paths: yes
